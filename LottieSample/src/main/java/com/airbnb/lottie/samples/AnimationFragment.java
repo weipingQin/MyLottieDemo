@@ -17,6 +17,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class AnimationFragment extends Fragment {
+  public static final String TAG = "AnimationFragment";
   private static final int RC_ASSET = 1337;
   private static final int RC_FILE = 1338;
   private static final int RC_URL = 1339;
@@ -62,7 +64,7 @@ public class AnimationFragment extends Fragment {
   @BindView(R.id.instructions) ViewGroup instructionsContainer;
   @BindView(R.id.animation_container) ViewGroup animationContainer;
   @BindView(R.id.animation_view) LottieAnimationView animationView;
-  @BindView(R.id.seek_bar) AppCompatSeekBar seekBar;
+  @BindView(R.id.seek_bar) SeekBar seekBar;
   @BindView(R.id.invert_colors) ImageButton invertButton;
   @BindView(R.id.play_button) ImageButton playButton;
   @BindView(R.id.loop) ImageButton loopButton;
@@ -113,10 +115,17 @@ public class AnimationFragment extends Fragment {
     });
     animationView.addAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
-      public void onAnimationUpdate(ValueAnimator animation) {
-        seekBar.setProgress((int) (animation.getAnimatedFraction() * 100));
+      public void onAnimationUpdate(ValueAnimator valueAnimator) {
+        Log.d(TAG,""+valueAnimator.getAnimatedValue());
       }
     });
+//    animationView.addAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//      @Override
+//      public void onAnimationUpdate(ValueAnimator animation) {
+//        seekBar.setProgress((int) (animation.getAnimatedFraction() * 100));
+//        Log.d(TAG,""+animation.getAnimatedValue());
+//      }
+//    });
 
     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -32,6 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/outline"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
             android:duplicateParentState="true"/>
 
         <LinearLayout
@@ -154,7 +156,7 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatSeekBar
+    <SeekBar
         android:id="@+id/seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
